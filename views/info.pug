@@ -179,6 +179,14 @@ block content
 
           li
             p
+              strong getutxos (/ext/getutxos/hash)
+              br
+              em Returns unspent list of given address
+              br
+              a(href='/ext/getutxos/' + hashes.address) #{address}/ext/getutxos/#{hashes.address}
+
+          li
+            p
               strong getlasttxsajax (/ext/getlasttxsajax/min)
               br
               em Returns last transactions greater than [min]
