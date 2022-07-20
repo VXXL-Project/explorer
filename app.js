@@ -20,7 +20,7 @@ bitcoinapi.setWalletDetails(settings.wallet);
 if (settings.heavy != true) {
   bitcoinapi.setAccess('only', ['getinfo', 'getnetworkhashps', 'getmininginfo', 'getdifficulty', 'getconnectioncount',
     'getblockcount', 'getblockhash', 'getblock', 'getrawtransaction', 'getpeerinfo', 'gettxoutsetinfo', 'verifymessage',
-    'getdescriptorinfo', 'deriveaddresses', 'sendrawtransaction']);
+    'getdescriptorinfo', 'deriveaddresses', 'sendrawtransaction', 'estimatesmartfee']);
 } else {
   // enable additional heavy api calls
   /*
