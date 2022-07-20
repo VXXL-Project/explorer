@@ -104,6 +104,18 @@ app.use('/ext/getaddress/:hash', function(req,res){
   });
 });
 
+// GETUTXOS API.
+app.use('/ext/getutxos/:hash', function(req,res){
+    db.get_address(req.param('hash'), function(address){
+        if (address) {
+            res.send( address.unspent );
+        }
+        else {
+            res.send({ error: 'address not found.', hash: req.param('hash')})
+        }
+    });
+});
+
 app.use('/ext/gettx/:txid', function(req, res) {
   var txid = req.params.txid;
   db.get_tx(txid, function(tx) {

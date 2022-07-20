@@ -34,3 +34,4 @@ settings.json
 .DS_Store
 
 package-lock.json
+lib/settings.js
