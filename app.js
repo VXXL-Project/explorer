@@ -1,6 +1,6 @@
 var express = require('express')
   , path = require('path')
-  , bitcoinapi = require('./lib/api')
+  , bitcoinapi = require('bitcoin-node-api')
   , favicon = require('static-favicon')
   , logger = require('morgan')
   , cookieParser = require('cookie-parser')
@@ -16,7 +16,7 @@ var express = require('express')
 var app = express();
 
 // bitcoinapi
-const client = bitcoinapi.setWalletDetails(settings.wallet);
+bitcoinapi.setWalletDetails(settings.wallet);
 if (settings.heavy != true) {
   bitcoinapi.setAccess('only', ['getinfo', 'getnetworkhashps', 'getmininginfo', 'getdifficulty', 'getconnectioncount',
     'getblockcount', 'getblockhash', 'getblock', 'getrawtransaction', 'getpeerinfo', 'gettxoutsetinfo', 'verifymessage',
@@ -54,29 +54,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 app.use('/api', bitcoinapi.app);
 app.use('/', routes);
-
-app.post('/ext/sendrawtransaction', function(req,res) {
-  const hex = req.body.hex;
-
-  console.log(client)
-
-  client.command([{
-    method: "sendrawtransaction",
-    parameters: [hex]
-  }], function(err, response) {
-    if (err) {
-      console.log(err); 
-      res.send("There was an error. Check your console.");
-    } else {
-      if (typeof response === 'object') {
-        res.json(response[0]);
-      } else {
-        res.send(""+response[0]);
-      }
-    }
-  });
-})
-
 app.use('/ext/getmoneysupply', function(req,res){
   lib.get_supply(function(supply){
     res.send(' '+supply);
