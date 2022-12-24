@@ -3,7 +3,6 @@ var mongoose = require('mongoose')
  
 var AddressSchema = new Schema({
   a_id: { type: String, unique: true, index: true},
-  txs: { type: Array, default: [] },
   unspent: { type: Array, default: [] },
   name: { type: String, default: '', index: true},
   received: { type: Number, default: 0, index: true },
